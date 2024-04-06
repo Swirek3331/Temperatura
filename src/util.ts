@@ -1,16 +1,35 @@
-export function zeros(x: number, y: number): number[][]
+function randomInt(min: number = 0, max: number = 100): number
 {
-    let arr: number[][] = new Array(x)
+    return Math.floor(Math.random() * (max - min + 1)) + min
+}
+
+function buildArray<T>(x: number, y: number)
+{
+    let arr: T[][] = new Array(x)
 
     for (let i = 0; i < arr.length; i++)
     {
         arr[i] = new Array(y)
+    }
 
+    return arr
+}
+
+function fillArray(arr: number[][], value?: number, min: number = 0, max: number = 100)
+{
+    for (let i = 0; i < arr.length; i++)
+    {
         for (let j = 0; j < arr[i].length; j++)
         {
-            arr[i][j] = 0
+            arr[i][j] = value || randomInt(min, max)
         }
     }
+}
+
+export function zeros(x: number, y: number): number[][]
+{
+    let arr = buildArray<number>(x, y)
+    fillArray(arr, 0)
 
     return arr
 }
